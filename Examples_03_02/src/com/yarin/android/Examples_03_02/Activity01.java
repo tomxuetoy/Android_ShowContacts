@@ -29,10 +29,18 @@ public class Activity01 extends Activity {
 			// 取得电话号码: ContactId -> phone -> PhoneNumber
 			String ContactId = cursor.getString(cursor
 					.getColumnIndex(ContactsContract.Contacts._ID));
-			Cursor phone = cr.query(
-					ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-					ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "="
-							+ ContactId, null, null);
+
+			Cursor phone = cr
+					.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+							null,
+							ContactsContract.CommonDataKinds.Phone.CONTACT_ID
+									+ "="
+									+ ContactId
+									+ " AND "
+									+ ContactsContract.CommonDataKinds.Phone.TYPE
+									+ "="
+									+ ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE,
+							null, null);
 
 			while (phone.moveToNext()) {
 				String PhoneNumber = phone
